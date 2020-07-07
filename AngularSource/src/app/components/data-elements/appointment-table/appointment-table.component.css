@@ -1,0 +1,23 @@
+Table {
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+}
+
+Button{
+	margin: 0;
+	width: 100%;
+}
+
+input{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+select{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	border: 1px solid black;
+}

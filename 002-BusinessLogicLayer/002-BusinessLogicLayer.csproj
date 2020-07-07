@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>QualishTestBLL</RootNamespace>
+    <AssemblyName>QualishTestBLL</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\001-DataAccessLayer\001-DataAccessLayer.csproj" />
+  </ItemGroup>
+
+</Project>

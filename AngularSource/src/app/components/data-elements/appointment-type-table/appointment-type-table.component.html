@@ -1,0 +1,16 @@
+<form #formInfo="ngForm">
+    <table id="AppointmentTypesTable">
+        <tr>
+            <th *ngFor="let header of myHeaders" class="border">{{ header }}</th>
+        </tr>
+        <tr ngModelGroup="row{{i}}" #nameCtrl="ngModelGroup" *ngFor="let type of appointmentTypes; let i = index">
+            <td><input #appointmentTypeNameInfo{{i}}="ngModel" required minlength="2" type="text" attr.id="appointmentTypeName{{type.appointmentTypeId}}" [(ngModel)]="appointmentTypes[i].appointmentTypeName" placeholder="Type" [ngModelOptions]="{standalone: true}"></td>
+            <td><button value="{{i}}" attr.id="appTypeBtnUpdate{{type.appointmentTypeId}}" [disabled]="nameCtrl.invalid" (click)="updateType($event)">Update Type</button></td>
+            <td><button value="{{i}}" attr.id="appTypeBtnDelete{{type.appointmentTypeId}}" [disabled]="formInfo.form.invalid" (click)="deleteType($event)">Delete Type</button></td>
+        </tr>
+        <tr ngModelGroup="row" #nameCtrl="ngModelGroup">
+            <td><input #appointmentTypeNameInfo="ngModel" required minlength="2" type="text" attr.id="appointmentTypeNameAdd" [(ngModel)]="appointmentType.appointmentTypeName" placeholder="Add Type" [ngModelOptions]="{standalone: true}"></td>
+            <td colspan="2"><button attr.id="appTypeBtnAdd" [disabled]="nameCtrl.invalid" (click)="addType()">Add Type</button></td>
+        </tr>
+    </table>
+</form>

@@ -1,0 +1,44 @@
+<form #formInfo="ngForm">
+    <table id="AppointmentsTable">
+        <tr>
+            <th *ngFor="let header of myHeaders" class="border">{{ header }}</th>
+        </tr>
+        <tr ngModelGroup="row{{i}}" #nameCtrl="ngModelGroup" *ngFor="let oneappointment of appointments; let i = index">
+            <td><input #customerNameInfo{{i}}="ngModel" required minlength="2" type="text" attr.id="customerName{{oneappointment.appointmentId}}" [(ngModel)]="appointments[i].customerName" placeholder="Customer Name" [ngModelOptions]="{standalone: true}"></td>
+            <td><input #appointmentDateInfo{{i}}="ngModel" required type="date" attr.id="appointmentDate{{oneappointment.appointmentId}}" [ngModel]="appointments[i].appointmentDate | date:'yyyy-MM-dd'" (ngModelChange)="appointments[i].appointmentDate = $event" placeholder="Appointment Date" [ngModelOptions]="{standalone: true}"></td>
+            <td><input #appointmentDayInfo{{i}}="ngModel" required type="text" disabled attr.id="appointmentDay{{oneappointment.appointmentId}}" [ngModel]="appointments[i].appointmentDate | date:'EEEE'" placeholder="Appointment Day" [ngModelOptions]="{standalone: true}"></td>
+            <td><input #startTimeInfo{{i}}="ngModel" required type="time" attr.id="startTime{{oneappointment.appointmentId}}" [ngModel]="appointments[i].startTime | date:'HH:mm'" (ngModelChange)="appointments[i].startTime = $event" placeholder="Start Time" [ngModelOptions]="{standalone: true}"></td>
+            <td><input #endTimeInfo{{i}}="ngModel" required type="time" attr.id="endTime{{oneappointment.appointmentId}}" [ngModel]="appointments[i].endTime | date:'HH:mm'" (ngModelChange)="appointments[i].endTime = $event" placeholder="End Time" [ngModelOptions]="{standalone: true}"></td>
+            <td>
+                <select #appointmentTypeInfo{{i}}="ngModel" required type="text" name="appointmentType{{oneappointment.appointmentId}}" id="appointmentType{{oneappointment.appointmentId}}" [(ngModel)]="oneappointment.appointmentTypeId">
+                    <option *ngFor="let type of appointmentTypes" [ngValue]="type.appointmentTypeId">{{ type.appointmentTypeName }}</option>
+                </select>
+            </td>
+            <td>
+                <select #appointmentImportanceInfo{{i}}="ngModel" required type="text" name="appointmentImportance{{oneappointment.appointmentId}}" id="appointmentImportance{{oneappointment.appointmentId}}" [(ngModel)]="oneappointment.importanceId">
+                    <option *ngFor="let importance of appointmentImportances" [ngValue]="importance.importanceId">{{ importance.importanceName }}</option>
+                </select>
+            </td>
+            <td><button value="{{i}}" attr.id="appointmentBtnUpdate{{oneappointment.appointmentId}}" [disabled]="nameCtrl.invalid" (click)="updateAppointment($event)">Update Appointment</button></td>
+            <td><button value="{{i}}" attr.id="appointmentBtnDelete{{oneappointment.appointmentId}}" (click)="deleteAppointment($event)">Delete Appointment</button></td>
+        </tr>
+        <tr ngModelGroup="row" #nameCtrl="ngModelGroup">
+            <td><input #customerNameInfo="ngModel" required minlength="2" type="text" attr.id="customerName" [(ngModel)]="appointment.customerName" placeholder="Customer Name" [ngModelOptions]="{standalone: true}"></td>
+            <td><input #appointmentDateInfo="ngModel" required type="date" attr.id="appointmentDate" [(ngModel)]="appointment.appointmentDate" placeholder="Appointment Date" [ngModelOptions]="{standalone: true}"></td>
+            <td><input #appointmentDayInfo="ngModel" required type="text" disabled attr.id="appointmentDay" [ngModel]="appointment.appointmentDate | date:'EEEE'" placeholder="Appointment Day" [ngModelOptions]="{standalone: true}"></td>
+            <td><input #startTimeInfo="ngModel" required type="time" attr.id="startTime" [(ngModel)]="appointment.startTime" placeholder="Start Time" [ngModelOptions]="{standalone: true}"></td>
+            <td><input #endTimeInfo="ngModel" required type="time" attr.id="endTime" [(ngModel)]="appointment.endTime" placeholder="End Time" [ngModelOptions]="{standalone: true}"></td>
+            <td>
+                <select #appointmentTypeInfo="ngModel" required type="text" name="appointmentType" id="appointmentType" [(ngModel)]="appointment.appointmentTypeId">
+                    <option *ngFor="let type of appointmentTypes" [ngValue]="type.appointmentTypeId">{{ type.appointmentTypeName }}</option>
+                </select>
+            </td>
+            <td>
+                <select #appointmentImportanceInfo="ngModel" required type="text" name="appointmentImportance" id="appointmentImportance" [(ngModel)]="appointment.importanceId">
+                    <option *ngFor="let importance of appointmentImportances" [ngValue]="importance.importanceId">{{ importance.importanceName }}</option>
+                </select>
+            </td>
+            <td colspan="2"><button attr.id="appointmentBtnAdd" [disabled]="nameCtrl.invalid" (click)="addAppointment()">Add Appointment</button></td>
+        </tr>
+    </table>
+</form>
