@@ -177,12 +177,7 @@ namespace QualishTest
 			try
 			{
 				int i = appointmentRepository.DeleteAppointment(appointmentId);
-				if (i > 0)
-				{
-					return NoContent();
-				}
-				return StatusCode(StatusCodes.Status500InternalServerError);
-
+				return NoContent();
 			}
 			catch (Exception ex)
 			{
