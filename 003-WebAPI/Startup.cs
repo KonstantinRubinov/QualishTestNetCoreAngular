@@ -90,6 +90,9 @@ namespace QualishTest
 
 			app.UseAuthorization();
 
+			//Add our new middleware to the pipeline
+			app.UseRequestResponseLogging();
+
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllerRoute(
