@@ -82,8 +82,14 @@ export class AppointmentTableComponent implements OnInit, OnDestroy {
     this.appointmentService.DeleteAppointment( this.appointments[data.target.value].appointmentId);
   }
 
+  private formatTime(){
+    this.appointment.startTime = new Date(Date.prototype.setHours.apply(new Date(), this.appointment.startTime.toString().split(':')));
+    this.appointment.endTime = new Date(Date.prototype.setHours.apply(new Date(), this.appointment.endTime.toString().split(':')));
+  }
+
   public addAppointment(){
     try {
+      this.formatTime();
       let hours = this.CheckAppointmentTime(this.appointment);
       if (hours) {
         let days = this.CheckAppointmentDay(this.appointment);
